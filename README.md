@@ -1,3 +1,8 @@
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![MobX](https://img.shields.io/badge/MobX-f58a42?style=for-the-badge)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
 # App-Development Test
 At Floatplane our user-facing applications are built using MobX for state management and React for UI elements. We have a strong emphasis on keeping data and rendering code separate. We also use Typescript with very strict typing rules.
 
