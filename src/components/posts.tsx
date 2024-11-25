@@ -3,6 +3,16 @@ import { useRef, useEffect } from "react"
 import { Post } from "../interfaces"
 import postsStore, { getThumbnail } from "../stores/postsStore"
 
+// Handle infinite scroll-to-load
+function onIntersection(entries: any[]) {
+  const firstEntry = entries[0]
+  if (postsStore.hasMore && firstEntry.isIntersecting) {
+    postsStore.loadMore()
+  }
+}
+
+// Post card with thumbnail, description, etc.
+// Links to the thumbnail, in production would link to the actual posts
 function PostComponent({ post }: { post: Post }) {
   return (
     <>
@@ -17,7 +27,7 @@ function PostComponent({ post }: { post: Post }) {
             <div className="flex items-center my-2">
               <img
                 className="w-10 h-10 rounded-full mr-4"
-                src={post.channel.icon.path}
+                src={getThumbnail(post.channel.icon)}
                 alt="Channel icon"
               />
               <div className="text-sm">
@@ -40,13 +50,7 @@ function PostComponent({ post }: { post: Post }) {
   )
 }
 
-function onIntersection(entries: any[]) {
-  const firstEntry = entries[0]
-  if (postsStore.hasMore && firstEntry.isIntersecting) {
-    postsStore.loadMore()
-  }
-}
-
+// Flex grid of all post cards
 function PostsView() {
   const elementRef = useRef(null)
   useEffect(() => {

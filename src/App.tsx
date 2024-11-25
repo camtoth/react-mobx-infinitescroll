@@ -5,6 +5,7 @@ import RenderCreatorsView from "./components/creators"
 import { observer } from "mobx-react"
 import RenderPostsView from "./components/posts"
 
+// Sticky "go back" button for posts view
 function Navigation() {
   return (
     <>
@@ -17,6 +18,7 @@ function Navigation() {
   )
 }
 
+// Handle switching views
 function PageContent() {
   return (
     <>

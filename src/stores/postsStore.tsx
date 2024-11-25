@@ -8,12 +8,12 @@ class PostsStore {
   hasMore = true
   creatorName = ""
 
-  // static values
+  // other class attributes
   fetchOffset = 0
   fetchPostLimit = 5
   creatorId = ""
 
-  //opted for declarative approach instead of using makeAutoObservable
+  // opted for declarative approach instead of using makeAutoObservable
   constructor() {
     makeObservable(this, {
       posts: observable,
@@ -73,6 +73,8 @@ class PostsStore {
   }
 }
 
+// Handles not all entries having childImages
+// Used also for getting creator icons
 export function getThumbnail(thumbnail: Thumbnail) {
   if (thumbnail.childImages && thumbnail.childImages.length !== 0) {
     return thumbnail.childImages[0].path
@@ -81,6 +83,6 @@ export function getThumbnail(thumbnail: Thumbnail) {
   }
 }
 
-const postsStore = new PostsStore() // instead of creating it here, I would create the PostsStore after a
+const postsStore = new PostsStore()
 
 export default postsStore

@@ -4,6 +4,7 @@ import { Creator } from "../interfaces"
 import { pageStore } from "../stores/pageStore"
 import { getThumbnail } from "../stores/postsStore"
 
+// Creator card with name and icon
 function CreatorComponent({ creator }: { creator: Creator }) {
   return (
     <button onClick={() => pageStore.navToPostsByCreator(creator.id)}>
@@ -23,6 +24,7 @@ function CreatorComponent({ creator }: { creator: Creator }) {
   )
 }
 
+// Flex grid of all creator cards
 function CreatorsView() {
   return (
     <>

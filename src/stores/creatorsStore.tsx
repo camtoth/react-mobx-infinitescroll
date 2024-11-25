@@ -7,7 +7,7 @@ class CreatorsStore {
   // observable values
   creators: Creator[] = []
 
-  //opted for declarative approach instead of using makeAutoObservable
+  // makeAutoObservable would be equivalent for this class
   constructor() {
     makeObservable(this, {
       creators: observable,
