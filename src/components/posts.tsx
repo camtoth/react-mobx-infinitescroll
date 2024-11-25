@@ -1,7 +1,8 @@
 import { observer } from "mobx-react"
 import { useRef, useEffect } from "react"
 import { Post } from "../interfaces"
-import postsStore, { getThumbnail } from "../stores/postsStore"
+import { useStores } from "../stores/StoreContext" // Import useStores hook to get the store
+import { getThumbnail } from "../stores/postsStore"
 
 // Handle infinite scroll-to-load
 function onIntersection(entries: any[]) {
@@ -31,9 +32,7 @@ function PostComponent({ post }: { post: Post }) {
                 alt="Channel icon"
               />
               <div className="text-sm">
-                <p className="text-gray-900 leading-none">
-                  {post.channel.title}
-                </p>
+                <p className="text-gray-900 leading-none">{post.channel.title}</p>
                 <p className="text-gray-600">
                   {post.releaseDate.toString().replace(/T(.*):.*/, " $1")}
                 </p>
@@ -52,19 +51,20 @@ function PostComponent({ post }: { post: Post }) {
 
 // Flex grid of all post cards
 function PostsView() {
+  const { postsStore } = useStores() // Get postsStore from context
   const elementRef = useRef(null)
+
   useEffect(() => {
-    const intersectionObserver = new IntersectionObserver(onIntersection)
-    if (intersectionObserver && elementRef.current) {
+    const intersectionObserver = new IntersectionObserver((entries) => onIntersection(entries, postsStore))
+    if (elementRef.current) {
       intersectionObserver.observe(elementRef.current)
     }
 
     return () => {
-      if (intersectionObserver) {
-        intersectionObserver.disconnect()
-      }
+      intersectionObserver.disconnect()
     }
-  })
+  }, [postsStore])
+
   return (
     <>
       <h1>Posts by {postsStore.creatorName}</h1>
@@ -79,6 +79,7 @@ function PostsView() {
 const ObservedPostsView = observer(PostsView)
 
 function RenderPostsView() {
+  const { postsStore } = useStores() // Access postsStore from context
   postsStore.loadMore()
 
   return (

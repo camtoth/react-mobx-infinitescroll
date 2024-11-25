@@ -2,7 +2,7 @@ import { action, flow, makeObservable, observable } from "mobx"
 import { Post, Thumbnail } from "../interfaces"
 
 // MobX store
-class PostsStore {
+export class PostsStore {
   // observable values
   posts: Post[] = []
   hasMore = true

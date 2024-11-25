@@ -3,7 +3,7 @@ import { Creator } from "../interfaces"
 import creatorslist from "../assets/creators-list.json"
 
 // MobX store
-class CreatorsStore {
+export class CreatorsStore {
   // observable values
   creators: Creator[] = []
 

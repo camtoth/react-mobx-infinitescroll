@@ -1,11 +1,12 @@
 import { observer } from "mobx-react"
-import creatorsStore from "../stores/creatorsStore"
+import { useStores } from "../stores/StoreContext" // import the useStores hook
 import { Creator } from "../interfaces"
-import { pageStore } from "../stores/pageStore"
 import { getThumbnail } from "../stores/postsStore"
 
 // Creator card with name and icon
 function CreatorComponent({ creator }: { creator: Creator }) {
+  const { pageStore } = useStores() // Get pageStore from context
+  
   return (
     <button onClick={() => pageStore.navToPostsByCreator(creator.id)}>
       <div className="basis-1 lg:w-64 lg:h-64 w-32 h-auto bg-white border border-gray-200 rounded-lg shadow">
@@ -26,6 +27,8 @@ function CreatorComponent({ creator }: { creator: Creator }) {
 
 // Flex grid of all creator cards
 function CreatorsView() {
+  const { creatorsStore } = useStores() // Get creatorsStore from context
+
   return (
     <>
       <h1 className="mb-4 text-wrap text-center">Check out all these amazing creators!</h1>
@@ -41,6 +44,8 @@ function CreatorsView() {
 const ObservedCreatorsView = observer(CreatorsView)
 
 function RenderCreatorsView() {
+  const { creatorsStore } = useStores() // Get creatorsStore from context
+
   creatorsStore.loadCreators()
 
   return (
@@ -53,3 +58,4 @@ function RenderCreatorsView() {
 }
 
 export default RenderCreatorsView
+

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import postsStore from "./postsStore"
 
-class PageStore {
+export class PageStore {
   currentPage = "creators"
 
   constructor() {
